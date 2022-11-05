@@ -1,7 +1,8 @@
 <script>
+  import Calculator from "./components/Calculator.svelte";
 </script>
 
-<main />
+<main> 
+  <Calculator />
+</main>
 
-<style>
-</style>
