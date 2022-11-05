@@ -6,7 +6,7 @@
 
   // Проверка на знак / число
   $: lastIsNumber = calculatedField[calculatedField.length - 1] && !isNaN(calculatedField[calculatedField.length - 1]);
-  
+
   // Обрабатывать вычисления
   function handleComputing(o) {
     const operations = {
@@ -87,8 +87,10 @@
       if (calculatedField[calculatedField.length - 1] !== "=") {
         if (lastIsNumber) {
           calculatedField.push("=");
-          // calculatedField = []
-          // calculatedField.push(result)
+          setTimeout(()=>{
+            calculatedField = []
+          calculatedField.push(result)
+          },0)
         } else {
           calculatedField[calculatedField.length - 1] = "=";
         }
@@ -149,30 +151,13 @@
     result = 0;
   }
   // Clear
-  function FHandleClear() {
-    // Необходимо, для перехода от последнего знач в массиве, к предпоследнему если последний пуст.
-    // Используем замыкание что бы не было лишних глобальных переменн.
-    let sum = 1;
-    return function () {
-      if (calculatedField[calculatedField.length - 1].length === 0) {
-        calculatedField.pop()
-      }
-      if (calculatedField[calculatedField.length - 1].length === 0) {
-        sum++;
-        calculatedField[calculatedField.length - sum] = calculatedField[
-          calculatedField.length - 1
-        ].slice(0, -1);
-        
-      } else {
-        calculatedField[calculatedField.length - 1] = calculatedField[
-          calculatedField.length - 1
-        ].slice(0, -1);
-        sum = 1;
-      }
-    };
+  function handleClear() {
+    calculatedField[calculatedField.length - 1] = calculatedField[calculatedField.length - 1].slice(0, -1);
+    if (calculatedField[calculatedField.length - 1].length === 0) {
+      calculatedField.pop()
+    }  
   }
-  let handleClear = FHandleClear();
-
+    
   // обрабатывать нажатие клавиши
   function handleKeypress(e) {
     let k = { target: { innerText: e.key } };
@@ -309,4 +294,4 @@
 
 <svelte:body on:keydown={handleKeypress} />
 
-<CalculatorUI {result} {buttons} {calculatedField} />
+<CalculatorUI {buttons} {calculatedField} />

@@ -1,23 +1,11 @@
 <script>
-  export let result;
   export let calculatedField;
   export let buttons;
 </script>
 
 <div class="calculator">
   <div id="Workspace">
-    {#if result !== "err"}
-
     <div class="calculatedField">{calculatedField.length ? calculatedField.join(" ") : 0}</div>
-    <div class="result">
-      {#if result !== null}
-        {result}
-      {/if}
-    </div>
-  
-    {:else}
-      <div>{result}</div>
-    {/if}
   </div>
   {#each buttons as button}
     <button id={button.id} on:click={button.func}>{button.value}</button>
@@ -52,7 +40,6 @@
     flex-direction: column;
     justify-content: end;
     text-align: right;
-
   }
 
   .calculatedField {
@@ -83,48 +70,12 @@
     padding-right: 1px;
     box-shadow: none;
   }
-  #clear {
+  #clear, #divide, #multiply, #minus, #plus {
     background-color: #FEA010;
     color: #F1F1F3;
     box-shadow: none;
   }
-  #clear:active {
-    padding: 0;
-    color: black;
-  }
-  #divide{
-    background-color: #FEA010;
-    color: #F1F1F3;
-    box-shadow: none;
-  }
-  #divide:active {
-    padding: 0;
-    color: black;
-  }
-  #multiply{
-    background-color: #FEA010;
-    color: #F1F1F3;
-    box-shadow: none;
-  }
-  #multiply:active {
-    padding: 0;
-    color: black;
-  }
-  #minus{
-    background-color: #FEA010;
-    color: #F1F1F3;
-    box-shadow: none;
-  }
-  #minus:active {
-    padding: 0;
-    color: black;
-  }
-  #plus {
-    background-color: #FEA010;
-    color: #F1F1F3;
-    box-shadow: none;
-  }
-  #plus:active {
+  #clear:active, #divide:active,  #multiply:active, #minus:active, #plus:active {
     padding: 0;
     color: black;
   }
